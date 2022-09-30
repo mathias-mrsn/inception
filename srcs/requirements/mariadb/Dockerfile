@@ -11,6 +11,6 @@ COPY bin/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 EXPOSE 3306
 
-CMD ["/bin/sh", "/usr/local/bin/entrypoint.sh"]
+CMD ["/bin/bash", "/usr/local/bin/entrypoint.sh"]
 
 # Create var $MARIADB_BIN_PATH

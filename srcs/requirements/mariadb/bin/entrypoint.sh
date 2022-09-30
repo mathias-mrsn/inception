@@ -11,6 +11,6 @@ else
     echo "=> Using an existing volume of MariaDB"
 fi
 
-bash /usr/bin/mysqld_safe &
+bash /usr/bin/mysqld_safe
 
 # Put VOLUME_HOME in .env file
