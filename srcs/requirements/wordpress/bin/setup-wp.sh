@@ -10,13 +10,13 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 && chmod +x wp-cli.phar > /dev/null
 
 # Move WP-CLI in local directory
-&& sudo mv wp-cli.phar /usr/local/bin/wp > /dev/null
+&& mv wp-cli.phar /usr/local/bin/wp > /dev/null
 
 # Move configuration file to the right directory
-&& sudo mv /etc/local/wp-configuration/www.conf /etc/php/7.3/fpm/pool.d/ > /dev/null
+&& mv /etc/local/wp-configuration/www.conf /etc/php/7.3/fpm/pool.d/ > /dev/null
 
 # Install wordpress
-&& wp core download > /dev/null
+&& wp core download --allow-root > /dev/null
 
 # Configure WP databases
 && wp core config --dbname=wordpress --dbuser=utilisateur --dbpass=motdepasse --dbhost=localhost --dbprefix=wp_ > /dev/null
