@@ -4,6 +4,7 @@ RUN apt-get -y update \
     && apt-get install -y php \
     && apt-get install -y mariadb-client \
     && apt-get install -y php-fpm \
+    && apt-get install -y php-mysql \
     # && apt-get install -y php5-fpm \
     # && apt-get install -y php5-mcrypt \
     # && apt-get install -y php5-curl \

@@ -2,6 +2,7 @@ FROM debian:buster
 
 RUN apt-get -y update \
 	&& apt-get -y install mariadb-server \
+	&& apt-get -y install mariadb-client \
 	&& apt-get -y install vim \
 	&& apt-get -y install procps
 
