@@ -3,14 +3,18 @@ version: '3.7'
 services:
   mariadb:
     container_name: mariadb
+    hostname: mariadb
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
     ports: 
       - "3306:3306"
+    networks:
+      - net
 
   wordpress:
     container_name: wordpress
+    hostname: wordpress
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
@@ -20,9 +24,12 @@ services:
       - "mariadb"
     volumes:
       - "wordpress_volume:/var/www/html"
+    networks:
+      - net
 
   nginx:
     container_name: nginx
+    hostname: nginx
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
@@ -32,7 +39,17 @@ services:
       - "wordpress"
     volumes:
       - "wordpress_volume:/var/www/html"
+    networks:
+      - net
 
 volumes:
   wordpress_volume:
   mariadb_volume:
+
+networks:
+  net:
+    driver: bridge
+
+# docker-compose down
+# docker rm -f $(docker ps -a -q)
+# docker volume rm $(docker volume ls -q)

@@ -18,3 +18,5 @@ EXPOSE 3306
 CMD ["/bin/bash", "/usr/local/bin/entrypoint.sh"]
 
 # Create var $MARIADB_BIN_PATH
+
+# docker run -p 3306:3306 --net=net -d -v mariadb_volume:/var/lib/mysql/ -h="mariadb" -t mariadb
