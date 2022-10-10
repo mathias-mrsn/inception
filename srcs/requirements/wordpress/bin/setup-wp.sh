@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 100;
+sleep 10;
 
 # Download WP-CLI tool
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
@@ -15,10 +15,10 @@ chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp 
 
 # Move configuration file to the right directory
-mv /etc/local/wp-configuration/www.conf /etc/php/7.3/fpm/pool.d/ 
 # mv /etc/local/wp-configuration/wp-config.php /etc/php/7.3/fpm/pool.d/ 
 
-/bin/bash
+mv /etc/local/wp-configuration/www.conf /etc/php/7.3/fpm/pool.d/ 
+
 # Install wordpress
 wp core download --allow-root --path="/var/www/html" 
 
@@ -26,11 +26,20 @@ wp core download --allow-root --path="/var/www/html"
 wp config create --allow-root --dbname=Inception --dbuser=mamaurai --dbpass=Inception123 --dbhost=mariadb:3306 --dbprefix=wp_ --config-file="/var/www/html/wp-config.php" --path="/var/www/html"
 
 # Add some informations to WP
-wp core install --allow-root --url="mamaurai.42.fr" --title="Titre du Site" --admin_user="ben" --admin_password="lebenjos" --admin_email="ben@email.com" --path="/var/www/html"
+wp core install --allow-root --url="mamaurai.42.fr" --title="Inception" --admin_user="ben" --admin_password="lebenjos" --admin_email="ben@email.com" --path="/var/www/html"
+
+wp user create --allow-root "mamaurai" "mamaurai@student.42.fr" --user_pass="Inception123" --send-email --path="/var/www/html"
 
 mkdir -p /run/php/
 
 php-fpm7.3 -F
+
+
+
+
+
+
+
 
 # docker network create net
 
