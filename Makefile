@@ -20,12 +20,14 @@ restart: stop up
 frestart: dclear up
 
 status:
+		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} ps
 		
 log:
+		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} logs --tail=100
 
 
 # .env
 # finir Makefile
-# rm wp-config
 # entrypoint.sh pour wp
 # wait mariadb dans wp entrypoint
+# configurer volume path
