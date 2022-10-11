@@ -13,11 +13,11 @@ EXPOSE 9000
 RUN mkdir -p /etc/local/wp-configuration
 
 COPY ./configuration/* /etc/local/wp-configuration/
-COPY ./bin/setup-wp.sh /etc/local/wp-configuration/
+COPY ./bin/* /etc/local/wp-configuration/
 
 WORKDIR /var/www/html
 
-CMD ["/bin/sh", "/etc/local/wp-configuration/setup-wp.sh"]
+CMD ["/bin/sh", "/etc/local/wp-configuration/entrypoint.sh"]
 
 
 # docker run -p 9000:9000 --net=net -d -v wordpress:/var/www/html -h="wordpress" -t wordpress

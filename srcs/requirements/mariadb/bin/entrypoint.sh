@@ -1,10 +1,9 @@
 #!/bin/bash
 
-VOLUME_HOME="/var/lib/mysql"
 chmod 644 /etc/mysql/mariadb.conf.d/*.cnf
 
-if [[ ! -f $VOLUME_HOME/initialized ]]; then
-    echo "=> An empty or uninitialized MariaDB volume is detected in $VOLUME_HOME"
+if [[ ! -f ${INITIALIZED_FILE}/initialized ]]; then
+    echo "=> An empty or uninitialized MariaDB volume is detected in ${INITIALIZED_FILE}"
     echo "=> Installing MariaDB ..."
     bash /usr/local/bin/setup_db.sh
 else
@@ -13,4 +12,4 @@ fi
 
 bash /usr/bin/mysqld_safe
 
-# Put VOLUME_HOME in .env file
+# Put INITIALIZED_FILE in .env file

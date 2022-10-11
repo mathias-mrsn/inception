@@ -10,14 +10,20 @@ while [[ RET -ne 0 ]]; do
     RET=$?
 done
 
-echo "=> Creating Mariadb database named Inception"
+echo "=> Creating Mariadb database named ${DATABASE_NAME}"
 
-mysql -uroot -e "CREATE DATABASE Inception;"
-mysql -uroot -e "CREATE USER 'ben'@'%' IDENTIFIED BY 'lebenjos'"
-mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'ben'@'%' WITH GRANT OPTION"
+mysql -uroot -e "CREATE DATABASE ${DATABASE_NAME};"
+echo "CREATE DATABASE ${DATABASE_NAME};"
+mysql -uroot -e "CREATE USER '${ADMIN_USERNAME}'@'%' IDENTIFIED BY '${ADMIN_PASSWORD}';"
+echo "CREATE USER '${ADMIN_USERNAME}'@'%' IDENTIFIED BY '${ADMIN_PASSWORD}';"
+mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO '${ADMIN_USERNAME}'@'%' WITH GRANT OPTION"
+echo "GRANT ALL PRIVILEGES ON *.* TO '${ADMIN_USERNAME}'@'%' WITH GRANT OPTION"
 mysql -uroot -e "FLUSH PRIVILEGES;"
-mysql -uroot -e "CREATE USER 'mamaurai'@'%' IDENTIFIED BY 'Inception123'"
-mysql -uroot -e "GRANT ALL PRIVILEGES ON Inception.* TO 'mamaurai'@'%' WITH GRANT OPTION"
+echo "FLUSH PRIVILEGES;"
+mysql -uroot -e "CREATE USER '${USERNAME}'@'%' IDENTIFIED BY '${PASSWORD}'"
+echo "CREATE USER '${USERNAME}'@'%' IDENTIFIED BY '${PASSWORD}'"
+mysql -uroot -e "GRANT ALL PRIVILEGES ON ${DATABASE_NAME}.* TO '${USERNAME}'@'%' WITH GRANT OPTION"
+echo "GRANT ALL PRIVILEGES ON ${DATABASE_NAME}.* TO '${USERNAME}'@'%' WITH GRANT OPTION"
 mysql -uroot -e "FLUSH PRIVILEGES;"
 
 echo "=> Done!"
@@ -31,14 +37,14 @@ echo "========================================================================"
 
 mysqladmin -uroot shutdown
 
-touch /var/lib/mysql/initialized
+touch ${INITIALIZED_FILE}/initialized
 
 # Names to change
-# Inception -> $DATABASE_NAME
-# ben -> $ROOT_USERNAME
-# lebenjos -> $ROOT_PASSWORD
-# mamaurai -> $USERNAME
-# Inception123 -> $PASSWORD
+# Inception -> $DATABASE_NAME /
+# ben -> $ROOT_USERNAME /
+# lebenjos -> $ROOT_PASSWORD /
+# mamaurai -> $USERNAME /
+# Inception123 -> $PASSWORD /
 
 # Variables to add
-# VOLUME_HOME
+# INITIALIZED_FILE

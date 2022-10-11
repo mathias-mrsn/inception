@@ -1,49 +1,17 @@
 #!/bin/bash
 
-sleep 10;
-
-# Download WP-CLI tool
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
-
-# Check if WP-CLI has been downloaded
-php wp-cli.phar --info 
-
-# Allow us to execute WP-CLI
-chmod +x wp-cli.phar 
-
-# Move WP-CLI in local directory
-mv wp-cli.phar /usr/local/bin/wp 
-
-# Move configuration file to the right directory
-# mv /etc/local/wp-configuration/wp-config.php /etc/php/7.3/fpm/pool.d/ 
-
-mv /etc/local/wp-configuration/www.conf /etc/php/7.3/fpm/pool.d/ 
-
 # Install wordpress
-wp core download --allow-root --path="/var/www/html" 
+wp core download --allow-root --path="${WP_PATH}"
 
 # Configure WP databases
-wp config create --allow-root --dbname=Inception --dbuser=mamaurai --dbpass=Inception123 --dbhost=mariadb:3306 --dbprefix=wp_ --config-file="/var/www/html/wp-config.php" --path="/var/www/html"
+wp config create --allow-root --dbname=${DATABASE_NAME} --dbuser=${USERNAME} --dbpass=${PASSWORD} --dbhost=${DB_HOST} --dbprefix=wp_ --config-file="${WP_PATH}/wp-config.php" --path="${WP_PATH}"
 
 # Add some informations to WP
-wp core install --allow-root --url="mamaurai.42.fr" --title="Inception" --admin_user="ben" --admin_password="lebenjos" --admin_email="ben@email.com" --path="/var/www/html"
+wp core install --allow-root --url="${DOMAIN_NAME}" --title=${WP_TITLE} --admin_user=${ADMIN_USERNAME} --admin_password=${ADMIN_PASSWORD} --admin_email="${ADMIN_EMAIL}" --path="${WP_PATH}"
 
-wp user create --allow-root "mamaurai" "mamaurai@student.42.fr" --user_pass="Inception123" --send-email --path="/var/www/html"
+# Create new user
+wp user create --allow-root "${USERNAME}" "${EMAIL}" --user_pass="${PASSWORD}" --path="${WP_PATH}"
 
+# Start PHP-FPM
 mkdir -p /run/php/
-
 php-fpm7.3 -F
-
-
-
-
-
-
-
-
-# docker network create net
-
-
-# docker run --net=net_test -p 443:443
-# docker volume create -d wordpress_volume
-# docker run -d -v wordpress_volume:/var/www/html 
