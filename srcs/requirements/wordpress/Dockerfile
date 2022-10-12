@@ -6,7 +6,8 @@ RUN apt-get -y update \
     && apt-get install -y php-fpm \
     && apt-get install -y php-mysql \
     && apt-get install -y curl \
-    && apt-get install -y procps
+    && apt-get install -y procps \
+    && apt-get install -y lsb-release redis-server
 
 EXPOSE 9000
 
