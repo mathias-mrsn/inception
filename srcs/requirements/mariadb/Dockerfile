@@ -15,7 +15,7 @@ RUN chmod 777 /var /var/run /var/run/mysqld /run/mysqld /var/lib/mysql
 
 EXPOSE 3306
 
-CMD ["/bin/bash", "/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "/usr/local/bin/entrypoint.sh"]
 
 # Create var $MARIADB_BIN_PATH
 

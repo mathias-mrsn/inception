@@ -45,5 +45,6 @@ logs:
 
 
 # configurer volume path
+# check if wp is installed with file
 
 # BUG CSS doesn't work sometimes
