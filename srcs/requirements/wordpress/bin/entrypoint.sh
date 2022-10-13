@@ -8,19 +8,15 @@ while [ $RET -ne 0 ]; do
     RET=$?
 done
 
-# Download WP-CLI tool
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
+if [ ! -f ${WP_PATH}/.initialized_wp ]; then
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
+    php wp-cli.phar --info 
+    chmod +x wp-cli.phar 
+    mv wp-cli.phar /usr/local/bin/wp 
+    mv ${WP_LOCAL_PATH}/www.conf /etc/php/7.3/fpm/pool.d/ 
+    bash ${WP_LOCAL_PATH}/setup-wp.sh
+else
+    echo "=> Wordpress already installed"
+fi
 
-# Check if WP-CLI has been downloaded
-php wp-cli.phar --info 
-
-# Allow us to execute WP-CLI
-chmod +x wp-cli.phar 
-
-# Move WP-CLI in local directory
-mv wp-cli.phar /usr/local/bin/wp 
-
-# Move configuration file to the right directory
-mv ${WP_LOCAL_PATH}/www.conf /etc/php/7.3/fpm/pool.d/ 
-
-bash ${WP_LOCAL_PATH}/setup-wp.sh
+exec "$@"

@@ -16,7 +16,3 @@ RUN chmod 777 /var /var/run /var/run/mysqld /run/mysqld /var/lib/mysql
 EXPOSE 3306
 
 ENTRYPOINT ["/bin/bash", "/usr/local/bin/entrypoint.sh"]
-
-# Create var $MARIADB_BIN_PATH
-
-# docker run -p 3306:3306 --net=net -d -v mariadb_volume:/var/lib/mysql/ -h="mariadb" -t mariadb
