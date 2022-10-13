@@ -7,26 +7,28 @@ VOLUME_PATH = /home/mamaurai/data
 all:	up
 re:		restart
 
-up:		create_volume
+up:		# create_volume
 		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
 
-up-back: create_volume
+up-back: # create_volume
 		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up -d
 
 stop:	
 		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} stop
 
-clean:	destroy_volume stop
+clean:	# destroy_volume
+		make stop
 		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} down
 
-dclean: destroy_volume stop
+dclean: # destroy_volume
+		make stop
 		${BASH} ${CLEAR_FILE} || true
 
-restart: destroy_volume create_volume
+restart: # destroy_volume create_volume
 		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} stop || true
 		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
 
-drestart: destroy_volume create_volume
+drestart: # destroy_volume create_volume
 		${BASH} ${CLEAR_FILE} || true
 		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
 

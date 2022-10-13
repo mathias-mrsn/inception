@@ -11,7 +11,7 @@ services:
       - "3306:3306"
     restart: always
     networks:
-      - net
+      - back
     env_file:
       - variables.env
     volumes:
@@ -32,7 +32,8 @@ services:
     volumes:
       - "wordpress_volume:/var/www/html"
     networks:
-      - net
+      - front
+      - back
     env_file:
       - variables.env
     command: ["php-fpm7.3", "-F"]
@@ -51,7 +52,7 @@ services:
     volumes:
       - "wordpress_volume:/var/www/html"
     networks:
-      - net
+      - front
     env_file:
       - variables.env
     command: ["nginx", "-g", "daemon off;"]
@@ -70,25 +71,27 @@ services:
     volumes:
       - "wordpress_volume:/var/www/html"
     networks:
-      - net
+      - front
     env_file:
       - variables.env
     command: ["redis-server", "--protected-mode no"]
 
 volumes:
   wordpress_volume:
-    driver: "local"
-    driver_opts:
-      o: bind 
-      type: "none"
-      device: /home/mamaurai/data/wordpress
+    # driver: "local"
+    # driver_opts:
+    #   o: bind 
+    #   type: "none"
+    #   device: /home/mamaurai/data/wordpress
   mariadb_volume:
-    driver: "local"
-    driver_opts:
-      o: bind 
-      type: "none"
-      device: /home/mamaurai/data/mariadb
+    # driver: "local"
+    # driver_opts:
+    #   o: bind 
+    #   type: "none"
+    #   device: /home/mamaurai/data/mariadb
 
 networks:
-  net:
+  front:
+    driver: bridge
+  back:
     driver: bridge
