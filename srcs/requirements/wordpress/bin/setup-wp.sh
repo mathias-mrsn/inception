@@ -9,5 +9,6 @@ wp config set WP_REDIS_PORT --allow-root "6379"
 wp plugin install redis-cache --allow-root --path="${WP_PATH}" --activate
 wp plugin update --all --allow-root
 wp theme install --allow-root twentytwenty --activate --force
+wp redis enable --allow-root
 mkdir -p /run/php/ /etc/local
 touch ${WP_PATH}/.initialized_wp
