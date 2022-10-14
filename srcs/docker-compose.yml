@@ -76,6 +76,25 @@ services:
       - variables.env
     command: ["redis-server", "--protected-mode no"]
 
+  adminer:
+    container_name: adminer
+    hostname: adminer
+    build:
+      context: ./requirements/adminer
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - "mariadb"
+    restart: always
+    volumes:
+      - "mariadb_volume:/var/run/mysqld"
+    networks:
+      - back
+    env_file:
+      - variables.env
+    command: ["php", "-S", "0.0.0.0:8000"]
+
 volumes:
   wordpress_volume:
     # driver: "local"
