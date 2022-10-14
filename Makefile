@@ -8,40 +8,40 @@ all:	up
 re:		restart
 
 up:		# create_volume
-		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
 
 up-back: # create_volume
-		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up -d
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up -d
 
 stop:	
-		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} stop
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} stop
 
 clean:	# destroy_volume
 		make stop
-		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} down
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} down
 
 dclean: # destroy_volume
-		make stop
-		${BASH} ${CLEAR_FILE} || true
+		@make stop
+		@${BASH} ${CLEAR_FILE} || true
 
 restart: # destroy_volume create_volume
-		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} stop || true
-		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} stop || true
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
 
 drestart: # destroy_volume create_volume
-		${BASH} ${CLEAR_FILE} || true
-		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
+		@${BASH} ${CLEAR_FILE} || true
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
 
 create_volume:
-		sudo mkdir -p ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/mariadb || true
+		@sudo mkdir -p ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/mariadb || true
 
 destroy_volume:
-		sudo rm -rf ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/mariadb || true
+		@sudo rm -rf ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/mariadb || true
 
 status:
-		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} ps
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} ps
 		
 logs:
-		${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} logs --tail=100
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} logs --tail=100
 
 .PHONY: all re up up-back stop clean dclean restart drestart create_volume destroy_volume status logs

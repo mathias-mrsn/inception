@@ -2,7 +2,9 @@ FROM debian:buster
 
 RUN apt-get update -y \
     && apt-get install -y wget \
-    && apt-get install -y php7.3-fpm php7.3-common php7.3-mysql
+    && apt-get install -y php7.3-fpm \
+    && apt-get install -y php7.3-common \
+    && apt-get install -y php7.3-mysql
 
 EXPOSE 8000
 

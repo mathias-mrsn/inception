@@ -8,8 +8,8 @@ RUN apt-get -y update \
 RUN mkdir -p /etc/local/vsftpd
 
 COPY ./bin/entrypoint.sh /etc/local/vsftpd/entrypoint.sh
-COPY ./configuration/vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY ./configuration/vsftpd.conf /etc/vsftpd.conf
 
-EXPOSE 20 21
+EXPOSE 20/tcp 21/tcp 40000-40009/tcp
 
-# ENTRYPOINT ["/bin/sh", "/etc/local/vsftpd/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "/etc/local/vsftpd/entrypoint.sh"]
