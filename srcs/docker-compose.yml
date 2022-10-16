@@ -95,6 +95,27 @@ services:
       - variables.env
     command: ["php", "-S", "0.0.0.0:8000"]
 
+  vsftpd:
+    container_name: vsftpd
+    hostname: vsftpd
+    build:
+      context: ./requirements/vsftpd
+      dockerfile: Dockerfile
+    ports:
+      - "20:20"
+      - "21:21"
+      - "40000-40009:40000-40009"
+    depends_on:
+      - "wordpress"
+    restart: always
+    volumes:
+      - "wordpress:/var/run/mysqld"
+    networks:
+      - front
+    env_file:
+      - variables.env
+    command: ["vsftpd", "/etc/vsftpd.conf"]
+
 volumes:
   wordpress_volume:
     # driver: "local"

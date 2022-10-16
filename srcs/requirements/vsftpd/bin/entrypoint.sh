@@ -11,4 +11,4 @@ else
     echo "=> vsftpd already installed"
 fi
 
-/usr/sbin/vsftpd /etc/vsftpd.conf
+exec "$@"
