@@ -8,5 +8,6 @@ EXPOSE 3000
 
 RUN mkdir -p /etc/local/nodejs
 COPY ./bin/entrypoint.sh /etc/local/nodejs/entrypoint.sh
+COPY ./srcs etc/local/nodejs
 
-ENTRYPOINT [ "/bin/bash", "/etc/local/nodejs/entrypoint.sh" ]
+# ENTRYPOINT [ "/bin/bash", "/etc/local/nodejs/entrypoint.sh" ]

@@ -1,3 +1,22 @@
+var express = require('express');
+var app = express();
+var server_path = "/etc/local/nodejs/srcs/server/"
+var www_path = "/var/www/html/"
+
+app.use(express.static(__dirname));
+
+app.route('*')
+.get(function(req, res) {
+    var url = req.url;
+    res.sendFile("/var/www/html" + url, (err) => {
+        if (err) {
+            res.status(404).send("<h1>Error 404</h1><h3> Not Found </h3>");
+        }
+    });
+})
+
+app.listen(3000);
+
 // const express = require('express')
 // const app = express()
 
@@ -19,96 +38,7 @@
 
 // app.listen(3000);
 
-var express = require('express');
-var app = express();
-
-var main_path = '~/42/inception/srcs/requirements/nodejs';
-// app.use(require('morgan')('dev'));
-app.use(express.static(main_path + '/srcs/www'));
-
-
-
-app.get('/', function(req, res) {
-    res.sendFile('~/42/inception/srcs/requirements/nodejs/srcs/www/index.html');
-});
-
-app.listen(3000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* **************************************************************************************************** */
 
 // let http = require('http'); // Here, you can add variables for each requirement
 // let fs = require('fs'); // Here, you can add variables for each requirement
