@@ -1,8 +1,7 @@
 #!/bin/bash
 
-cd /etc/local/nodejs
-npm -i --save express
+npm install --prefix /etc/local/nodejs
+npm install --prefix /etc/local/nodejs -g npm@8.19.2
+npm --prefix /etc/local/nodejs start
 
-# npm install # Install automatically every package asked in package.json
-# npm -i -g ... # Install globally a package
-# npm start
+# Change last cmd with exec "$@"
