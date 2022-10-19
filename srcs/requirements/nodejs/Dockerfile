@@ -16,4 +16,5 @@ COPY ./bin/entrypoint.sh /etc/local/nodejs/entrypoint.sh
 COPY ./srcs/server etc/local/nodejs
 COPY ./srcs/www /var/www/html
 
-# ENTRYPOINT [ "/bin/bash", "/etc/local/nodejs/entrypoint.sh" ]
+RUN npm install --prefix /etc/local/nodejs \
+    && npm install --prefix /etc/local/nodejs -g npm@8.19.2

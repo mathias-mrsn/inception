@@ -109,12 +109,26 @@ services:
       - "wordpress"
     restart: always
     volumes:
-      - "wordpress:/var/run/mysqld"
+      - "wordpress_volume:/var/www/html"
     networks:
       - front
     env_file:
       - variables.env
     command: ["vsftpd", "/etc/vsftpd.conf"]
+
+  nodejs:
+    container_name: nodejs
+    hostname: nodejs
+    build:
+      context: ./requirements/nodejs
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: always
+    volumes:
+      - "nodejs_volume:/var/www/html/www"
+    command: ["npm", "--prefix", "/etc/local/nodejs", "start"]
+
 
 volumes:
   wordpress_volume:
@@ -129,6 +143,12 @@ volumes:
     #   o: bind 
     #   type: "none"
     #   device: /home/mamaurai/data/mariadb
+  nodejs_volume:
+    # driver: "local"
+    # driver_opts:
+    #   o: bind 
+    #   type: "none"
+    #   device: /home/mamaurai/data/nodejs
 
 networks:
   front:
