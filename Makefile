@@ -33,10 +33,10 @@ drestart: # destroy_volume create_volume
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
 
 create_volume:
-		@sudo mkdir -p ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/mariadb || true
+		@sudo mkdir -p ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/mariadb ${VOLUME_PATH}/nodejs ${VOLUME_PATH}/portainer || true
 
 destroy_volume:
-		@sudo rm -rf ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/mariadb || true
+		@sudo rm -rf ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/mariadb ${VOLUME_PATH}/nodejs ${VOLUME_PATH}/portainer || true
 
 status:
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} ps

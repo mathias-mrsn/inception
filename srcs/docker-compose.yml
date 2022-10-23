@@ -129,6 +129,22 @@ services:
       - "nodejs_volume:/var/www/html/www"
     command: ["npm", "--prefix", "/etc/local/nodejs", "start"]
 
+  portainer:
+    container_name: portainer
+    hostname: portainer
+    build:
+      context: ./requirements/portainer
+      dockerfile: Dockerfile
+    ports:
+      - "9443:9443"
+    restart: always
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "portainer_volume:/data"
+    networks:
+      - back
+      - front
+
 
 volumes:
   wordpress_volume:
@@ -149,7 +165,13 @@ volumes:
     #   o: bind 
     #   type: "none"
     #   device: /home/mamaurai/data/nodejs
-
+  portainer_volume:
+    # driver: "local"
+    # driver_opts:
+    #   o: bind 
+    #   type: "none"
+    #   device: /home/mamaurai/data/portainer
+    
 networks:
   front:
     driver: bridge
