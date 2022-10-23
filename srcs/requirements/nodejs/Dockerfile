@@ -7,12 +7,10 @@ RUN apt-get update -y \
     && apt-get install -y aptitude \
     && aptitude install -y npm \
     && apt-get install -y vim
-    # && npm install -g npm@8.19.2
 
 EXPOSE 3000
 
 RUN mkdir -p /etc/local/nodejs
-COPY ./bin/entrypoint.sh /etc/local/nodejs/entrypoint.sh
 COPY ./srcs/server etc/local/nodejs
 COPY ./srcs/www /var/www/html
 
