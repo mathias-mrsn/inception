@@ -13,6 +13,4 @@ COPY bin/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN mkdir -p /var/run/mysqld
 RUN chmod 777 /var /var/run /var/run/mysqld /run/mysqld /var/lib/mysql
 
-EXPOSE 3306
-
 ENTRYPOINT ["/bin/bash", "/usr/local/bin/entrypoint.sh"]

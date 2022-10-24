@@ -1,5 +1,8 @@
 FROM debian:buster
 
+ARG NODEJS_SETUP
+ARG NODEJS_PATH
+
 RUN apt-get update -y \
     && apt-get install -y curl \
     && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
@@ -8,11 +11,10 @@ RUN apt-get update -y \
     && aptitude install -y npm \
     && apt-get install -y vim
 
-EXPOSE 3000
 
-RUN mkdir -p /etc/local/nodejs
-COPY ./srcs/server etc/local/nodejs
+RUN mkdir -p ${NODEJS_PATH}
+COPY ./srcs/server ${NODEJS_PATH}
 COPY ./srcs/www /var/www/html
 
-RUN npm install --prefix /etc/local/nodejs \
-    && npm install --prefix /etc/local/nodejs -g npm@8.19.2
+RUN npm install --prefix ${NODEJS_PATH} \
+    && npm install --prefix ${NODEJS_PATH} -g npm@8.19.2

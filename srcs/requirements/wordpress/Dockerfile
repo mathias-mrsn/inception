@@ -9,8 +9,6 @@ RUN apt-get -y update \
     && apt-get install -y procps \
     && apt-get install -y lsb-release redis-server
 
-EXPOSE 9000
-
 RUN mkdir -p /etc/local/wp-configuration
 
 COPY ./configuration/* /etc/local/wp-configuration/
