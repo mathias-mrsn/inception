@@ -7,7 +7,9 @@ VOLUME_PATH = /home/mamaurai/data
 all:	up
 re:		restart
 
-up:		# create_volume
+up:		up-back
+
+up-front:# create_volume
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
 
 up-back: # create_volume
