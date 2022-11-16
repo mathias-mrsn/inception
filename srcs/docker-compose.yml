@@ -7,8 +7,8 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
-    ports: 
-      - "${MARIADB_PORT}:${MARIADB_PORT}"
+    expose: 
+      - "${MARIADB_PORT}"
     restart: unless-stopped
     networks:
       - back
@@ -29,8 +29,8 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
-    ports:
-      - "${WP_PORT}:${WP_PORT}"
+    expose:
+      - "${WP_PORT}"
     depends_on:
       - "mariadb"
     restart: unless-stopped
@@ -81,8 +81,8 @@ services:
     build:
       context: ./requirements/redis
       dockerfile: Dockerfile
-    ports:
-      - "${REDIS_PORT}:${REDIS_PORT}"
+    expose:
+      - "${REDIS_PORT}"
     depends_on:
       - "wordpress"
     restart: unless-stopped
