@@ -29,9 +29,10 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
-    expose:
-      - "${WP_PORT}"
+    ports:
+      - "${WP_PORT}:${WP_PORT}"
     depends_on:
+      - "redis"
       - "mariadb"
     restart: unless-stopped
     volumes:
@@ -83,8 +84,6 @@ services:
       dockerfile: Dockerfile
     expose:
       - "${REDIS_PORT}"
-    depends_on:
-      - "wordpress"
     restart: unless-stopped
     volumes:
       - "wordpress_volume:${WP_PATH}"
@@ -92,7 +91,7 @@ services:
       - front
     environment:
       - REDIS_PORT=${REDIS_PORT}
-    command: ["redis-server", "--protected-mode no"]
+    command: ["/usr/bin/redis-server", "--protected-mode no"]
 
   adminer:
     container_name: adminer
@@ -173,7 +172,6 @@ services:
       - PORTAINER_VERSION=${PORTAINER_VERSION}
       - PORTAINER_PORT=${PORTAINER_PORT}
     command: ["/opt/portainer/portainer", "--admin-password", "${PORTAINER_PASSWORD}"]
-
 
 volumes:
   wordpress_volume:

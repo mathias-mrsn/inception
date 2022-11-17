@@ -6,9 +6,12 @@ wp core install --allow-root --url="${DOMAIN_NAME}" --title=${WP_TITLE} --admin_
 wp user create --allow-root "${USERNAME}" "${EMAIL}" --user_pass="${PASSWORD}" --path="${WP_PATH}"
 wp config set WP_REDIS_HOST --allow-root "redis"
 wp config set WP_REDIS_PORT --allow-root "6379"
+wp config set WP_CACHE --allow-root "true"
+wp config set FS_METHOD --allow-root "direct"
 wp plugin install redis-cache --allow-root --path="${WP_PATH}" --activate
-wp plugin update --all --allow-root
+wp plugin update --all --allow-root --path="${WP_PATH}"
 wp theme install --allow-root twentytwenty --activate --force
 wp redis enable --allow-root
+chown -R www-data:www-data /var/www
 mkdir -p /run/php/ /etc/local
 touch ${WP_PATH}/.initialized_wp

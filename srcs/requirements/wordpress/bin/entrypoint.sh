@@ -8,8 +8,10 @@ while [ $RET -ne 0 ]; do
     RET=$?
 done
 
-if [ ! -f ${WP_PATH}/.initialized_wp ]; then
-    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
+if [ ! -f ${WP_PATH}/.initialized_wp ]; then 
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    wget https://assets.digitalocean.com/articles/wordpress_redis/object-cache.php
+    mv object-cache.php /var/www/html/wp-content/
     php wp-cli.phar --info 
     chmod +x wp-cli.phar 
     mv wp-cli.phar /usr/local/bin/wp 

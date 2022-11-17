@@ -9,7 +9,7 @@ RUN apt-get -y update \
     && apt-get install -y procps \
     && apt-get install -y lsb-release redis-server
 
-RUN mkdir -p /etc/local/wp-configuration
+RUN mkdir -p /etc/local/wp-configuration /var/www/html
 
 COPY ./configuration/* /etc/local/wp-configuration/
 COPY ./bin/* /etc/local/wp-configuration/
@@ -17,5 +17,3 @@ COPY ./bin/* /etc/local/wp-configuration/
 WORKDIR /var/www/html
 
 ENTRYPOINT ["/bin/sh", "/etc/local/wp-configuration/entrypoint.sh"]
-
-# docker run -p 9000:9000 --net=net -d -v wordpress:/var/www/html -h="wordpress" -t wordpress

@@ -13,13 +13,13 @@ up-front:# create_volume
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
 
 up-back: # create_volume
-		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up -d
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build -d
 
 stop:	
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} stop
 
 clean:	# destroy_volume
-		make stop
+		@make stop
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} down
 
 dclean: # destroy_volume
@@ -28,11 +28,11 @@ dclean: # destroy_volume
 
 restart: # destroy_volume create_volume
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} stop || true
-		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build -d
 
 drestart: # destroy_volume create_volume
 		@${BASH} ${CLEAR_FILE} || true
-		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build
+		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build -d
 
 create_volume:
 		@sudo mkdir -p ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/mariadb ${VOLUME_PATH}/nodejs ${VOLUME_PATH}/portainer || true
