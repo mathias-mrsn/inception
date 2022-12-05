@@ -29,8 +29,8 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
-    ports:
-      - "${WP_PORT}:${WP_PORT}"
+    expose:
+      - "${WP_PORT}"
     depends_on:
       - "redis"
       - "mariadb"
@@ -49,7 +49,6 @@ services:
       - ADMIN_MAIL=${ADMIN_MAIL}
       - DB_HOST=${DB_HOST}
       - EMAIL=${EMAIL}
-      # database
       - DATABASE_NAME=${DATABASE_NAME}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
@@ -113,6 +112,8 @@ services:
       - ADMINER_VERSION=${ADMINER_VERSION}
     command: ["php", "-S", "0.0.0.0:${ADMINER_PORT}"]
 
+    # user : mamaurai | password : Inception123 | DB : Inception
+
   vsftpd:
     container_name: vsftpd
     hostname: vsftpd
@@ -135,6 +136,8 @@ services:
       - FTP_PASSWORD=${FTP_PASSWORD}
     command: ["vsftpd", "/etc/vsftpd.conf"]
 
+    # host : localhost | user : mamaurai | password : Inception123 | port : 21
+
   nodejs:
     container_name: nodejs
     hostname: nodejs
@@ -150,6 +153,8 @@ services:
     volumes:
       - "nodejs_volume:${NODEJS_VOLUME}"
     command: ["npm", "--prefix", "${NODEJS_PATH}", "start"]
+
+    # url : localhost:3000
 
   portainer:
     container_name: portainer
@@ -171,33 +176,35 @@ services:
     environment:
       - PORTAINER_VERSION=${PORTAINER_VERSION}
       - PORTAINER_PORT=${PORTAINER_PORT}
-    command: ["/opt/portainer/portainer", "--admin-password", "${PORTAINER_PASSWORD}"]
+    command: ["/opt/portainer/portainer", "--admin-password", "$$2y$$05$$3ciFxlH7ln8qzq4ePFcYsOfBofr5eyn6Xdb1cgQ8h3GQwNvp2XjZq"]
+
+    # login : admin | password :  superpassword | url : localhost:9443
 
 volumes:
   wordpress_volume:
-    # driver: "local"
-    # driver_opts:
-    #   o: bind 
-    #   type: "none"
-    #   device: ${VOLUME_PATH}/wordpress
+    driver: "local"
+    driver_opts:
+      o: bind 
+      type: "none"
+      device: ${VOLUME_PATH}/wordpress
   mariadb_volume:
-    # driver: "local"
-    # driver_opts:
-    #   o: bind 
-    #   type: "none"
-    #   device: ${VOLUME_PATH}/mariadb
+    driver: "local"
+    driver_opts:
+      o: bind 
+      type: "none"
+      device: ${VOLUME_PATH}/mariadb
   nodejs_volume:
-    # driver: "local"
-    # driver_opts:
-    #   o: bind 
-    #   type: "none"
-    #   device: ${VOLUME_PATH}/nodejs
+    driver: "local"
+    driver_opts:
+      o: bind 
+      type: "none"
+      device: ${VOLUME_PATH}/nodejs
   portainer_volume:
-    # driver: "local"
-    # driver_opts:
-    #   o: bind 
-    #   type: "none"
-    #   device: ${VOLUME_PATH}/portainer
+    driver: "local"
+    driver_opts:
+      o: bind 
+      type: "none"
+      device: ${VOLUME_PATH}/portainer
 
 networks:
   front:
