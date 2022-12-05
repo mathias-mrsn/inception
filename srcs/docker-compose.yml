@@ -7,8 +7,8 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
-    expose: 
-      - "${MARIADB_PORT}"
+    ports: 
+      - "${MARIADB_PORT}:${MARIADB_PORT}"
     restart: unless-stopped
     networks:
       - back
@@ -22,6 +22,8 @@ services:
       - USERNAME=${USERNAME}
       - PASSWORD=${PASSWORD}
     command: ["/usr/bin/mysqld_safe"]
+
+    # docker exec -it mariadb bash
 
   wordpress:
     container_name: wordpress
