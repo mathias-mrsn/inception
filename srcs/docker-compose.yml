@@ -19,7 +19,7 @@ services:
       - DATABASE_NAME=${DATABASE_NAME}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-      - USERNAME=${USERNAME}
+      - MY_USERNAME=${MY_USERNAME}
       - PASSWORD=${PASSWORD}
     command: ["/usr/bin/mysqld_safe"]
 
@@ -54,7 +54,7 @@ services:
       - DATABASE_NAME=${DATABASE_NAME}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-      - USERNAME=${USERNAME}
+      - MY_USERNAME=${MY_USERNAME}
       - PASSWORD=${PASSWORD}
     command: ["php-fpm7.3", "-F"]
 

@@ -3,8 +3,8 @@
 RET=1
 while [ $RET -ne 0 ]; do
     echo "=> Wordpress is waiting for confirmation of Mariadb service startup..."
-    sleep 5
-    mysqladmin -u ${USERNAME} -p${PASSWORD} -h mariadb ping > /dev/null 2>&1
+    sleep 2
+    mysqladmin -u ${MY_USERNAME} -p${PASSWORD} -h mariadb ping > /dev/null 2>&1
     RET=$?
 done
 

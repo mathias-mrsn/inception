@@ -1,4 +1,4 @@
-DOCKER_COMPOSE = sudo docker-compose
+DOCKER_COMPOSE = docker-compose
 DOCKER_COMPOSE_FILE = srcs/docker-compose.yml
 BASH = /bin/bash
 CLEAR_FILE = ./srcs/.dev/clear_all.sh
@@ -18,7 +18,7 @@ up-back: 	create_volume
 stop:	
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} stop
 
-clean:		destroy_volume
+clean:
 		@make stop
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} down
 
@@ -26,7 +26,7 @@ dclean: 	destroy_volume
 		@make stop
 		@${BASH} ${CLEAR_FILE} || true
 
-restart: 	destroy_volume create_volume
+restart:
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} stop || true
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build -d
 
@@ -38,7 +38,7 @@ create_volume:
 		@sudo mkdir -p ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/mariadb ${VOLUME_PATH}/nodejs ${VOLUME_PATH}/portainer || true
 
 destroy_volume:
-		@sudo rm -rf ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/mariadb ${VOLUME_PATH}/nodejs ${VOLUME_PATH}/portainer || true
+		@sudo rm -rf ${VOLUME_PATH}/wordpress ${VOLUME_PATH}/nodejs ${VOLUME_PATH}/portainer || true
 
 status:
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} ps
