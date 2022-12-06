@@ -3,6 +3,7 @@ version: '3.7'
 services:
   mariadb:
     container_name: mariadb
+    image: mariadb
     hostname: mariadb
     build:
       context: ./requirements/mariadb
@@ -24,9 +25,11 @@ services:
     command: ["/usr/bin/mysqld_safe"]
 
     # docker exec -it mariadb bash
+    # image : ...
 
   wordpress:
     container_name: wordpress
+    image: wordpress
     hostname: wordpress
     build:
       context: ./requirements/wordpress
@@ -60,6 +63,7 @@ services:
 
   nginx:
     container_name: nginx
+    image: nginx
     hostname: nginx
     build:
       context: ./requirements/nginx
@@ -79,6 +83,7 @@ services:
 
   redis:
     container_name: redis
+    image: redis
     hostname: redis
     build:
       context: ./requirements/redis
@@ -96,6 +101,7 @@ services:
 
   adminer:
     container_name: adminer
+    image: adminer
     hostname: adminer
     build:
       context: ./requirements/adminer
@@ -118,6 +124,7 @@ services:
 
   vsftpd:
     container_name: vsftpd
+    image: vsftpd
     hostname: vsftpd
     build:
       context: ./requirements/vsftpd
@@ -142,6 +149,7 @@ services:
 
   nodejs:
     container_name: nodejs
+    image: nodejs
     hostname: nodejs
     build:
       context: ./requirements/nodejs
@@ -160,6 +168,7 @@ services:
 
   portainer:
     container_name: portainer
+    image: portainer
     hostname: portainer
     build:
       context: ./requirements/portainer
