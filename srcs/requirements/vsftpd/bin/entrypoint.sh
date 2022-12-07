@@ -3,6 +3,7 @@
 if [ ! -f ".vsftpd_installed" ]; then
     addgroup ${FTP_GROUP}
     useradd -m ${FTP_USER}
+    usermod -d ${WP_PATH} ${FTP_USER}
     echo "${FTP_USER}:${FTP_PASSWORD}" | /usr/sbin/chpasswd
     usermod -g ${FTP_GROUP} ${FTP_USER}
     mkdir -p /var/run/vsftpd/empty
@@ -14,6 +15,3 @@ else
 fi
 
 exec "$@"
-
-# How to test
-# Launch FileZilla with (localhost, mamaurai, Inception123, 21)

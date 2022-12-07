@@ -24,9 +24,6 @@ services:
       - PASSWORD=${PASSWORD}
     command: ["/usr/bin/mysqld_safe"]
 
-    # docker exec -it mariadb bash
-    # image : ...
-
   wordpress:
     container_name: wordpress
     image: wordpress
@@ -120,8 +117,6 @@ services:
       - ADMINER_VERSION=${ADMINER_VERSION}
     command: ["php", "-S", "0.0.0.0:${ADMINER_PORT}"]
 
-    # user : mamaurai | password : Inception123 | DB : Inception
-
   vsftpd:
     container_name: vsftpd
     image: vsftpd
@@ -143,9 +138,8 @@ services:
     environment:
       - FTP_USER=${FTP_USER}
       - FTP_PASSWORD=${FTP_PASSWORD}
+      - WP_PATH=${WP_PATH}
     command: ["vsftpd", "/etc/vsftpd.conf"]
-
-    # host : localhost | user : mamaurai | password : Inception123 | port : 21
 
   nodejs:
     container_name: nodejs
@@ -163,8 +157,6 @@ services:
     volumes:
       - "nodejs_volume:${NODEJS_VOLUME}"
     command: ["npm", "--prefix", "${NODEJS_PATH}", "start"]
-
-    # url : localhost:3000
 
   portainer:
     container_name: portainer
@@ -188,8 +180,6 @@ services:
       - PORTAINER_VERSION=${PORTAINER_VERSION}
       - PORTAINER_PORT=${PORTAINER_PORT}
     command: ["/opt/portainer/portainer", "--admin-password", "$$2y$$05$$3ciFxlH7ln8qzq4ePFcYsOfBofr5eyn6Xdb1cgQ8h3GQwNvp2XjZq"]
-
-    # login : admin | password :  superpassword | url : localhost:9443
 
 volumes:
   wordpress_volume:
