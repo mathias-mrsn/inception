@@ -6,7 +6,7 @@ The sharing of this project on my GitHub aims to help peoples to open their mind
 
 **inception** is a project from the **42** Common Core. This project aims to learn how to use Docker and Docker Compose. We have to create a Web Server by using NGINX, WORPRESS and MARIADB.
 
-## Usage
+## How to install
 
 Before cloning the repository, open and edit the `/etc/hosts` file by adding the line below.
 
@@ -29,3 +29,17 @@ inception $> make
 ```
 
 Now you just have to write `https://mamaurai.42.fr` on your web browser.
+
+## How to connect to different services
+
+### Main web server:
+Go on Firefox and write `https://mamaurai.42.fr` on your web browser.
+
+### Static site:
+Go on Firefox and write `https://localhost:3000` on your web browser.
+
+### Adminer
+Go on Firefox and write `https://localhost:8000` on your web browser then connect with `mamaurai` - `Inception123` - `Inception`
+
+### Portainer
+GO on Firefox and write `https://localhost:9443` on your web browser. then connect with `admin` - `superpassword`
