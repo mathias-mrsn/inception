@@ -14,14 +14,14 @@ Before cloning the repository, open and edit the `/etc/hosts` file by adding the
 127.0.0.1   mamaurai.42.fr
 ```
 
-To avoid any CSS problem on your computer go to your web browser then left-click and select `Inspect` then `Network` and click on `Disable Cache`.
+To avoid any CSS problem on your computer go to your web browser then left-click and go to `Inspect -> Network` and click on `Disable Cache`.
 
-We can now install `Inception`.
+We can now launch `Inception`.
 
 ```bash
 $> gcl https://github.com/mathias-mrsn/inception.git
 $> inception
-# Optional to remove every docker containers, volumes or networks from yout PC
+# Optional to remove every docker containers, volumes and networks from your PC
 inception $> make dclean
 [...]
 inception $> make
